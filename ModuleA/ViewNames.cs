@@ -9,6 +9,5 @@ namespace ModuleA
     public class ViewNames
     {
         public const string ModuleAView = "ModuleAView";
-        public const string View2 = "View2";
     }
 }

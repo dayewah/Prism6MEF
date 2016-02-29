@@ -21,8 +21,6 @@ namespace ModuleA
         public void Initialize()
         {
             _regionManager.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(MenuItem));
-
-            //_regionManager.Regions["MainRegion"].Add(ServiceLocator.Current.GetInstance<ModuleAView>());
         }
     }
 }

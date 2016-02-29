@@ -42,7 +42,9 @@
             
             <!--ContentRegion-->
             <!--<ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}"></ContentControl>-->
-            <Controls:TransitioningContentControl x:Name="transitioning" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}" Transition="Left" />
+            <Controls:TransitioningContentControl 
+                prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}"
+                Transition="Left" />
         </DockPanel>
     </DockPanel>
 </Controls:MetroWindow>
