@@ -2,26 +2,24 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
+using System.ComponentModel.Composition;
 using Prism.Regions;
-using Prism.Events;
+using Infrastructure;
 
-namespace Main.ViewModels
+namespace ModuleA.ViewModels
 {
     [Export]
-    public class ShellViewModel : BindableBase
+    public class View2ViewModel : BindableBase
     {
         private IRegionManager _regionManager;
-        private IEventAggregator _eventAggregator;
-
         [ImportingConstructor]
-        public ShellViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
+        public View2ViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
 
-            this.Name = "Shell ViewModel";
+            this.Name = "Module A - View 2";
+
             NavigateCommand = new DelegateCommand<string>(Navigate);
 
         }
@@ -33,14 +31,11 @@ namespace Main.ViewModels
             set { SetProperty(ref _name, value); }
         }
 
-
         public DelegateCommand<string> NavigateCommand { get; set; }
 
         public void Navigate(string uri)
         {
-            _regionManager.RequestNavigate("MainRegion", uri);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, uri);
         }
-
-        
     }
 }

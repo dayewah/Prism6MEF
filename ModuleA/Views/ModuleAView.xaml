@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="ModuleA.Views.ModuleAView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <DockPanel Background="Azure">
+        <Button DockPanel.Dock="Top" Command="{Binding NavigateCommand}" CommandParameter="View2">Nav</Button>
+        <Label Content="{Binding Name}"  FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </DockPanel>
+</UserControl>
