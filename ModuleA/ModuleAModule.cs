@@ -20,7 +20,7 @@ namespace ModuleA
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(MenuItem));
+            _regionManager.RegisterViewWithRegion(RegionNames.ToolRegion, typeof(MenuItem));
         }
     }
 }

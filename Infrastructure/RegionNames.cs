@@ -9,6 +9,8 @@ namespace Infrastructure
     public class RegionNames
     {
         public static string ContentRegion = "ContentRegion";
-        public static string MenuRegion = "MenuRegion";
+        public static string ToolRegion = "ToolRegion";
+        public static string ToolContentRegion = "ToolContentRegion";
+        public static string FlyOut = "FlyOut";
     }
 }

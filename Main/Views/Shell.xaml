@@ -14,13 +14,23 @@
 
                       WindowTransitionsEnabled="False"
                       WindowStartupLocation="CenterScreen">
-    
-    <DockPanel Background="WhiteSmoke">
-        <DockPanel>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Header="Flyout" Position="Right" Width="500" Theme="Light">
+                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.FlyOut}"></ContentControl>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
 
-            <!-- MenuRegion -->
-            <Border DockPanel.Dock="Left" Background="#FF404040" Width="60" Padding="5">
-                <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MenuRegion}" >
+    <DockPanel Background="WhiteSmoke">
+        
+        <!--StatusBar-->
+        <StatusBar DockPanel.Dock="Bottom" Height="20"/>
+        
+        <DockPanel>
+            <!-- ToolRegion -->
+            <Border DockPanel.Dock="Left" Background="#FF404040" Width="50" Padding="5">
+                <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolRegion}" >
                         <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical" />
@@ -31,20 +41,25 @@
                             <Button Command="{Binding NavigateCommand}" 
                                     Content="{Binding Name}" 
                                     Background="WhiteSmoke"
-                                    Height="50" 
-                                    Width="50" 
-                                    FontSize="20"
+                                    Height="40" 
+                                    Width="40" 
+                                    FontSize="16"
                                     Margin="0,0,0,5"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Border>
             
+            <!--ToolContentRegion-->
+            <ContentControl DockPanel.Dock="Left" Background="WhiteSmoke" Width="200" 
+                prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolContentRegion}" />
+            
             <!--ContentRegion-->
-            <!--<ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}"></ContentControl>-->
             <Controls:TransitioningContentControl 
                 prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}"
                 Transition="Left" />
+            
         </DockPanel>
+        
     </DockPanel>
 </Controls:MetroWindow>
