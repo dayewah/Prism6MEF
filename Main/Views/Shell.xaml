@@ -1,19 +1,19 @@
 ﻿<Controls:MetroWindow x:Class="Main.Views.Shell"
-                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      xmlns:prism="http://prismlibrary.com/"    
-                      xmlns:inf="clr-namespace:Infrastructure;assembly=Infrastructure"
-                      prism:ViewModelLocator.AutoWireViewModel="True" 
-                      ShowTitleBar="True" 
-                      Title="Analysis Studio"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:prism="http://prismlibrary.com/"    
+    xmlns:inf="clr-namespace:Infrastructure;assembly=Infrastructure"
+    prism:ViewModelLocator.AutoWireViewModel="True" 
+    ShowTitleBar="True" 
+    Title="Analysis Studio"
                       
-                      BorderThickness="0" 
-                      GlowBrush="Black"
-                      ResizeMode="CanResizeWithGrip"
+    BorderThickness="0" 
+    GlowBrush="Black"
+    ResizeMode="CanResizeWithGrip"
 
-                      WindowTransitionsEnabled="False"
-                      WindowStartupLocation="CenterScreen">
+                      
+    WindowStartupLocation="CenterScreen" Background="WhiteSmoke">
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
             <Controls:Flyout Header="Flyout" Position="Right" Width="500" Theme="Light">
@@ -28,6 +28,7 @@
         <StatusBar DockPanel.Dock="Bottom" Height="20"/>
         
         <DockPanel>
+            
             <!-- ToolRegion -->
             <Border DockPanel.Dock="Left" Background="#FF404040" Width="50" Padding="5">
                 <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolRegion}" >
@@ -40,13 +41,16 @@
                         <DataTemplate>
                             <Button Command="{Binding NavigateCommand}" 
                                     Content="{Binding Name}" 
+                                    Style="{StaticResource ToolButton}"
                                     Background="WhiteSmoke"
                                     Height="40" 
                                     Width="40" 
                                     FontSize="16"
+                                    FontWeight="Bold"
                                     Margin="0,0,0,5"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
+                    
                 </ItemsControl>
             </Border>
             
