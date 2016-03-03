@@ -58,7 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuItemBase.cs" />
+    <Compile Include="Events\MenuToggleEvent.cs" />
+    <Compile Include="Events\MenuToggleEventArgs.cs" />
+    <Compile Include="MenuViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Resources\ResourceStrings.Designer.cs">

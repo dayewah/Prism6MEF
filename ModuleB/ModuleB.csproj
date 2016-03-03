@@ -67,7 +67,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuItem.cs" />
+    <Compile Include="MenuViewModel.cs" />
     <Compile Include="ModuleBModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

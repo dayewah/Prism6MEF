@@ -6,6 +6,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using Prism.Regions;
 using Prism.Events;
+using Infrastructure.Events;
 
 namespace Main.ViewModels
 {
@@ -21,26 +22,20 @@ namespace Main.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
 
-            this.Name = "Shell ViewModel";
-            NavigateCommand = new DelegateCommand<string>(Navigate);
+            _eventAggregator.GetEvent<MenuToggleEvent>().Subscribe(OnToolToggleEvent);
 
         }
 
-        private string _name;
-        public string Name
+        private bool _toolContentActive;
+        public bool ToolContentActive
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return _toolContentActive; }
+            set { SetProperty(ref _toolContentActive, value); }
         }
 
-
-        public DelegateCommand<string> NavigateCommand { get; set; }
-
-        public void Navigate(string uri)
+        private void OnToolToggleEvent(MenuToggleEventArgs args)
         {
-            _regionManager.RequestNavigate("MainRegion", uri);
+            this.ToolContentActive = args.IsChecked;
         }
-
-        
     }
 }

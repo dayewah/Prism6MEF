@@ -4,6 +4,8 @@ using System;
 using System.ComponentModel.Composition;
 using Prism.Mef.Modularity;
 using Infrastructure;
+using ModuleA.Views;
+using Microsoft.Practices.ServiceLocation;
 
 namespace ModuleA
 {
@@ -20,7 +22,11 @@ namespace ModuleA
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.ToolRegion, typeof(MenuItem));
+            //Initialize View to Module A
+            var menu=ServiceLocator.Current.GetInstance<MenuViewModel>();
+            menu.ToolToggleChecked = true;
+
+            _regionManager.RegisterViewWithRegion(RegionNames.ToolRegion, typeof(MenuViewModel));
         }
     }
 }

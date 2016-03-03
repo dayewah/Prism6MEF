@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure;
+using Prism.Events;
 using Prism.Regions;
 
 namespace ModuleB
 {
     [Export]
-    public class MenuItem: MenuItemBase
+    [PartCreationPolicy(CreationPolicy.Shared)]
+    public class MenuViewModel : MenuViewModelBase
     {
         [ImportingConstructor]
-        public MenuItem(IRegionManager regionManager)
-            : base(regionManager)
+        public MenuViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
+            : base(regionManager,eventAggregator)
         {
             this.Name = "MB";
             this.Uri = ViewNames.ModuleBView;

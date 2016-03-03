@@ -4,6 +4,7 @@
     xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:prism="http://prismlibrary.com/"    
     xmlns:inf="clr-namespace:Infrastructure;assembly=Infrastructure"
+    xmlns:conv="clr-namespace:Main.Converters"
     prism:ViewModelLocator.AutoWireViewModel="True" 
     ShowTitleBar="True" 
     Title="Analysis Studio"
@@ -22,15 +23,20 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-    <DockPanel Background="WhiteSmoke">
+    <DockPanel>
         
         <!--StatusBar-->
         <StatusBar DockPanel.Dock="Bottom" Height="20"/>
         
-        <DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             
             <!-- ToolRegion -->
-            <Border DockPanel.Dock="Left" Background="#FF404040" Width="50" Padding="5">
+            <Border Background="#FF404040" Width="50" Padding="5">
                 <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolRegion}" >
                         <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -39,7 +45,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding NavigateCommand}" 
+                            <ToggleButton IsChecked="{Binding ToolToggleChecked}"
                                     Content="{Binding Name}" 
                                     Style="{StaticResource ToolButton}"
                                     Background="WhiteSmoke"
@@ -55,15 +61,18 @@
             </Border>
             
             <!--ToolContentRegion-->
-            <ContentControl DockPanel.Dock="Left" Background="WhiteSmoke" Width="200" 
+            <Border Grid.Column="1" Background="WhiteSmoke" Width="300"
+                    Visibility="{Binding ToolContentActive, Converter={StaticResource BooleanToVisibilityConverter},FallbackValue=Collapsed}">
+                <ContentControl Grid.Column="1" 
                 prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolContentRegion}" />
+            </Border>
             
             <!--ContentRegion-->
-            <Controls:TransitioningContentControl 
+            <Controls:TransitioningContentControl Grid.Column="2"
                 prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}"
                 Transition="Left" />
             
-        </DockPanel>
+        </Grid>
         
     </DockPanel>
 </Controls:MetroWindow>
