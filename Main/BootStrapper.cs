@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ModuleA;
 using ModuleB;
+using TimeKeep;
 
 namespace Main
 {
@@ -26,6 +27,9 @@ namespace Main
 
             this.AggregateCatalog.Catalogs.Add(
                  new AssemblyCatalog(typeof(BootStrapper).Assembly));
+
+            this.AggregateCatalog.Catalogs.Add(
+                new AssemblyCatalog(typeof(TimeKeepModule).Assembly));
 
             this.AggregateCatalog.Catalogs.Add(
                 new AssemblyCatalog(typeof(ModuleAModule).Assembly));

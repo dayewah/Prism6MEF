@@ -24,21 +24,37 @@
     </Controls:MetroWindow.Flyouts>
 
     <DockPanel>
-        
+
         <!--StatusBar-->
-        <StatusBar DockPanel.Dock="Bottom" Height="20"/>
+        <StatusBar DockPanel.Dock="Bottom" Height="20" />
         
+        <!--Menu-->
+        <Menu DockPanel.Dock="Top" Background="WhiteSmoke" BorderThickness="0,0,0,1" BorderBrush="#FFDFDFDF">
+            <Menu.Resources>
+                <Style TargetType="MenuItem"></Style>
+            </Menu.Resources>
+            <MenuItem Header="File">
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Edit"></MenuItem>
+            <MenuItem Header="Tools"></MenuItem>
+            <MenuItem Header="Help"></MenuItem>
+        </Menu>
+
+        <!--Content-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
+
+
             <!-- ToolRegion -->
             <Border Background="#FF404040" Width="50" Padding="5">
                 <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolRegion}" >
-                        <ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical" />
                         </ItemsPanelTemplate>
@@ -56,23 +72,23 @@
                                     Margin="0,0,0,5"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
-                    
+
                 </ItemsControl>
             </Border>
-            
+
             <!--ToolContentRegion-->
-            <Border Grid.Column="1" Background="WhiteSmoke" Width="300"
-                    Visibility="{Binding ToolContentActive, Converter={StaticResource BooleanToVisibilityConverter},FallbackValue=Collapsed}">
+            <Border Grid.Column="1" Background="WhiteSmoke" Width="250"
+                    Visibility="{Binding ToolContentActive, Converter={StaticResource BooleanToVisibilityConverter},FallbackValue=Visible}">
                 <ContentControl Grid.Column="1" 
                 prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolContentRegion}" />
             </Border>
-            
+
             <!--ContentRegion-->
             <Controls:TransitioningContentControl Grid.Column="2"
                 prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}"
                 Transition="Left" />
-            
+
         </Grid>
-        
+
     </DockPanel>
 </Controls:MetroWindow>

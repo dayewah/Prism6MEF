@@ -23,8 +23,8 @@ namespace ModuleA
         public void Initialize()
         {
             //Initialize View to Module A
-            var menu=ServiceLocator.Current.GetInstance<MenuViewModel>();
-            menu.ToolToggleChecked = true;
+            //var menu=ServiceLocator.Current.GetInstance<MenuViewModel>();
+            //menu.ToolToggleChecked = true;
 
             _regionManager.RegisterViewWithRegion(RegionNames.ToolRegion, typeof(MenuViewModel));
         }

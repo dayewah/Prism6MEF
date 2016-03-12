@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Main.Properties {
+namespace TimeKeep.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
