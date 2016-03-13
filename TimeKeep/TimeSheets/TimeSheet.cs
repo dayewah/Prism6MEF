@@ -13,6 +13,8 @@ namespace TimeKeep.TimeSheets
     {
         private List<Entry> _entries;
 
+        //private TimeSheet(){ }
+
         public TimeSheet()
             :this(TimePeriod.Today)
         {

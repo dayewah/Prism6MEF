@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\TimeSheetContext.cs" />
+    <Compile Include="Data\TimeSheetRepository.cs" />
     <Compile Include="MenuViewModel.cs" />
     <Compile Include="TimeSheets\Entries\Entry.cs" />
     <Compile Include="TimeSheets\Entries\EntryCreatedEvent.cs" />

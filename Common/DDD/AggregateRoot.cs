@@ -12,6 +12,8 @@ namespace Common.DDD
 
         public IReadOnlyList<IDomainEvent> DomainEvents { get { return _domainEvents; } }
 
+        protected AggregateRoot() { }
+
         public AggregateRoot(Guid id)
             : base(Guid.NewGuid())
         {

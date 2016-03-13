@@ -11,7 +11,7 @@ namespace Common.Data
 {
     public abstract class Repository<T> : IRepository<T> where T : AggregateRoot
     {
-        private DbContext _context;
+        protected DbContext _context;
 
         public Repository(DbContext context)
         {
