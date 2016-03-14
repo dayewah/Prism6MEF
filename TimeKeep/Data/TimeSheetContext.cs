@@ -23,7 +23,6 @@ namespace TimeKeep.Data
         public DbSet<TimeSheet> TimeSheets { get; set; }
         public DbSet<Entry> Entries { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Filename=" + _path);
@@ -34,11 +33,14 @@ namespace TimeKeep.Data
         {
             base.OnModelCreating(modelBuilder);
 
+
             modelBuilder.Entity<TimeSheet>()
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<Entry>()
-                .HasKey(e => e.Id);
+                .Property(p => p.ProjectNumber).HasColumnName("ProjectNumber");
+            modelBuilder.Entity<Entry>()
+                            .Property(p => p.Time.Start).HasColumnName("StartTime");
 
             modelBuilder.Entity<Entry>() // http://ef.readthedocs.org/en/latest/modeling/relationships.html#fluent-api
                 .HasOne(e => e.Time);
