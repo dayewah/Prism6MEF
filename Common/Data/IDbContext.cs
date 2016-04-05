@@ -1,10 +1,13 @@
-﻿namespace Common.Data
+﻿using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.ChangeTracking;
+
+namespace Common.Data
 {
     public interface IDbContext
     {
-        //IDbSet<T> Set<T>() where T : class;
+        DbSet<T> Set<T>() where T : class;
         int SaveChanges();
-        //DbEntityEntry Entry(object o);
+        EntityEntry<T> Entry<T>(T entity) where T : class;
         void Dispose();
     }
 }

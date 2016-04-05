@@ -6,6 +6,7 @@ using System.Linq;
 using System.ComponentModel.Composition;
 using Prism.Regions;
 using Infrastructure;
+using Common.Data;
 
 namespace ModuleA.ViewModels
 {
@@ -18,10 +19,13 @@ namespace ModuleA.ViewModels
         public ModuleAViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
+            
 
             this.Name = "Module A View";
 
             NavigateCommand = new DelegateCommand<string>(Navigate);
+
+            
 
         }
 

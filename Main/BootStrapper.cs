@@ -16,7 +16,7 @@ namespace Main
 {
     public class BootStrapper: MefBootstrapper
     {
-        protected override System.Windows.DependencyObject CreateShell()
+        protected override DependencyObject CreateShell()
         {
             return Container.GetExportedValue<Shell>();
         }
@@ -28,17 +28,17 @@ namespace Main
             this.AggregateCatalog.Catalogs.Add(
                  new AssemblyCatalog(typeof(BootStrapper).Assembly));
 
-            this.AggregateCatalog.Catalogs.Add(
-                new AssemblyCatalog(typeof(TimeKeepModule).Assembly));
-
-            this.AggregateCatalog.Catalogs.Add(
-                new AssemblyCatalog(typeof(ModuleAModule).Assembly));
-
-            this.AggregateCatalog.Catalogs.Add(
-                new AssemblyCatalog(typeof(ModuleBModule).Assembly));
+            //this.AggregateCatalog.Catalogs.Add(
+            //    new AssemblyCatalog(typeof(TimeKeepModule).Assembly));
 
             //this.AggregateCatalog.Catalogs.Add(
-            //     new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
+            //    new AssemblyCatalog(typeof(ModuleAModule).Assembly));
+
+            //this.AggregateCatalog.Catalogs.Add(
+            //    new AssemblyCatalog(typeof(ModuleBModule).Assembly));
+
+            this.AggregateCatalog.Catalogs.Add(
+                 new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
         }
 
         protected override void InitializeShell()

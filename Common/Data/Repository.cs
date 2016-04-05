@@ -11,9 +11,9 @@ namespace Common.Data
 {
     public abstract class Repository<T> : IRepository<T> where T : AggregateRoot
     {
-        protected DbContext _context;
+        protected IDbContext _context;
 
-        public Repository(DbContext context)
+        public Repository(IDbContext context)
         {
             _context = context;
         }
@@ -34,14 +34,14 @@ namespace Common.Data
             if (_context.Set<T>().Any(e => e.Id == id))
             {
                 _context.Set<T>().Attach(aggregateRoot);
-                _context.Entry<T>(aggregateRoot).State = EntityState.Modified;
+                _context.Entry(aggregateRoot).State = EntityState.Modified;
             }
             else
             {
                 _context.Set<T>().Add(aggregateRoot);
             }
 
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void Delete(T aggregateRoot)

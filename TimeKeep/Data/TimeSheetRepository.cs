@@ -13,7 +13,7 @@ namespace TimeKeep.Data
     [Export(typeof(ITimeSheetRepository))]
     public class TimeSheetRepository : Repository<TimeSheet>, ITimeSheetRepository
     {
-        public TimeSheetRepository(DbContext context)
+        public TimeSheetRepository(IDbContext context)
             :base(context)
         {
         }
