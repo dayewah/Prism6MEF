@@ -17,7 +17,7 @@ namespace Models.DDD.TimeSheets.Entries
             this.Comment = comment;
             this.Time = time;
 
-            this.AddDomainEvent(new EntryCreatedEvent(this));
+            //this.AddDomainEvent(new EntryCreatedEvent(this));
         }
         public int ProjectNumber { get; private set; }
 

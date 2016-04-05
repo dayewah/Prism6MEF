@@ -8,9 +8,9 @@ namespace Common.DDD
 {
     public abstract class AggregateRoot : Entity
     {
-        private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
+        //private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
 
-        public IReadOnlyList<IDomainEvent> DomainEvents { get { return _domainEvents; } }
+        //public IReadOnlyList<IDomainEvent> DomainEvents { get { return _domainEvents; } }
 
         protected AggregateRoot() { }
 
@@ -19,14 +19,14 @@ namespace Common.DDD
         {
 
         }
-        protected virtual void AddDomainEvent(IDomainEvent newEvent)
-        {
-            _domainEvents.Add(newEvent);
-        }
+        //protected virtual void AddDomainEvent(IDomainEvent newEvent)
+        //{
+        //    _domainEvents.Add(newEvent);
+        //}
 
-        public virtual void ClearEvents()
-        {
-            _domainEvents.Clear();
-        }
+        //public virtual void ClearEvents()
+        //{
+        //    _domainEvents.Clear();
+        //}
     }
 }

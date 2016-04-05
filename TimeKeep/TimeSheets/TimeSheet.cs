@@ -54,7 +54,7 @@ namespace TimeKeep.TimeSheets
                 if (value != _timePeriod)
                 {
                     _timePeriod = value;
-                    this.AddDomainEvent(new TimeSheetPeriodChangedEvent(this));
+                    //this.AddDomainEvent(new TimeSheetPeriodChangedEvent(this));
                 }
             }
         }

@@ -9,7 +9,7 @@ using Common.DDD;
 
 namespace Common.Data
 {
-    public abstract class Repository<T> : IRepository<T> where T : AggregateRoot
+    public class Repository<T> : IRepository<T> where T : AggregateRoot
     {
         protected IDbContext _context;
 

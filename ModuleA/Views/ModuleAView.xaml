@@ -4,6 +4,10 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <DockPanel Background="White">
-        <Label Content="{Binding Name}"  FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Label DockPanel.Dock="Top" Content="{Binding Name}"  FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+        <TextBox DockPanel.Dock="Top" Margin="5" Text="{Binding SettingName}"></TextBox>
+        <TextBox DockPanel.Dock="Top" Margin="5"  Text="{Binding SettingValue}"></TextBox>
+        <Button Margin="5" Command="{Binding SubmitCommand}"> Submit</Button>
     </DockPanel>
 </UserControl>

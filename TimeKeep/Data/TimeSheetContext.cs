@@ -49,21 +49,21 @@ namespace TimeKeep.Data
 
         public override int SaveChanges()
         {
-            //https://lostechies.com/jimmybogard/2014/05/13/a-better-domain-events-pattern/
-            var domainEventEntities = ChangeTracker.Entries<AggregateRoot>()
-                .Select(po => po.Entity)
-                .Where(po => po.DomainEvents.Any())
-                .ToArray();
+            ////https://lostechies.com/jimmybogard/2014/05/13/a-better-domain-events-pattern/
+            //var domainEventEntities = ChangeTracker.Entries<AggregateRoot>()
+            //    .Select(po => po.Entity)
+            //    .Where(po => po.DomainEvents.Any())
+            //    .ToArray();
 
-            foreach (var aggregateRoot in domainEventEntities)
-            {
-                var events = aggregateRoot.DomainEvents.ToArray();
-                aggregateRoot.ClearEvents();
-                foreach (var domainEvent in events)
-                {
-                    DomainEvents.Dispatch(domainEvent);
-                }
-            }
+            //foreach (var aggregateRoot in domainEventEntities)
+            //{
+            //    var events = aggregateRoot.DomainEvents.ToArray();
+            //    aggregateRoot.ClearEvents();
+            //    foreach (var domainEvent in events)
+            //    {
+            //        DomainEvents.Dispatch(domainEvent);
+            //    }
+            //}
 
             return base.SaveChanges();
         }
