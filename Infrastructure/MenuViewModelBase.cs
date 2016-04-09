@@ -29,13 +29,14 @@ namespace Infrastructure
 
         private void OnToolToggleEvent(MenuToggleEventArgs isChecked)
         {
+            //Toggle off for all MenuViewModels except the caller on that raised the MenuToggleEvent
             _toolToggleChecked = false;
             this.OnPropertyChanged(() => this.ToolToggleChecked);
         }
 
         public string Name { get; set; }
 
-        protected string Uri { get; set; }
+        protected string MainUri { get; set; }
 
         private bool _toolToggleChecked;
         public bool ToolToggleChecked
@@ -44,10 +45,12 @@ namespace Infrastructure
             set 
             { 
                 SetProperty(ref _toolToggleChecked, value);
+
                 var arg = new MenuToggleEventArgs(this.GetHashCode(), _toolToggleChecked);
                 _eventAggregator.GetEvent<MenuToggleEvent>().Publish(arg);
+
                 if (this.ToolToggleChecked)
-                    _regionManager.RequestNavigate(RegionNames.ContentRegion, this.Uri);
+                    _regionManager.RequestNavigate(RegionNames.ContentRegion, this.MainUri);
                 
             }
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure;
+using ModuleA.Views;
 using Prism.Events;
 using Prism.Regions;
 
@@ -19,7 +20,7 @@ namespace ModuleA
             : base(regionManager, eventAggregator)
         {
             this.Name = "MA";
-            this.Uri = ViewNames.ModuleAView;
+            this.MainUri = typeof(MainView).FullName;
         }
 
         

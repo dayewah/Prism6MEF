@@ -19,7 +19,7 @@ namespace ModuleB
             : base(regionManager,eventAggregator)
         {
             this.Name = "MB";
-            this.Uri = ViewNames.ModuleBView;
+            this.MainUri = ViewNames.ModuleBView;
         }
 
         

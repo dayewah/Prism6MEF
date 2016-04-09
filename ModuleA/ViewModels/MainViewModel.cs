@@ -12,15 +12,18 @@ using ModuleA.Data;
 namespace ModuleA.ViewModels
 {
     [Export]
-    public class ModuleAViewModel : BindableBase, INavigationAware
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    [RegionMemberLifetime(KeepAlive = false)]
+    public class MainViewModel : BindableBase, INavigationAware
     {
         private IRegionManager _regionManager;
         private IUnitOfWork _unitOfWork;
 
         [ImportingConstructor]
-        public ModuleAViewModel(IRegionManager regionManager)
+        public MainViewModel(IRegionManager regionManager, IUnitOfWork unitOfWork)
         {
             _regionManager = regionManager;
+            _unitOfWork = unitOfWork;
 
             this.Name = "Module A View";
 
@@ -36,6 +39,8 @@ namespace ModuleA.ViewModels
             get { return _name; }
             set { SetProperty(ref _name, value); }
         }
+
+        #region Navigation
 
         public DelegateCommand<string> NavigateCommand { get; set; }
 
@@ -56,9 +61,6 @@ namespace ModuleA.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            var context = new SettingsContext();
-            context.Database.EnsureCreated();
-            _unitOfWork = new UnitOfWork(context);
             var s=_unitOfWork.Repository<Settings>().GetAll().FirstOrDefault();
 
             if (s != null)
@@ -69,6 +71,10 @@ namespace ModuleA.ViewModels
             }
             
         }
+
+        #endregion
+
+        #region Model Properties
 
         private Guid _id;
         public Guid Id
@@ -90,6 +96,9 @@ namespace ModuleA.ViewModels
             set { SetProperty(ref _settingValue, value); }
         }
 
+        #endregion
+
+        #region Commands
 
         public DelegateCommand SubmitCommand { get; set; }
 
@@ -97,9 +106,8 @@ namespace ModuleA.ViewModels
         {
             var s = _unitOfWork.Repository<Settings>().GetById(this.Id);
 
-            var id = s == null ? Guid.NewGuid() : this.Id;
-
-            s = new Settings(id, this.SettingName, this.SettingValue);
+            s.UpdateName(this.SettingName);
+            s.UpdateValue(this.SettingValue);
             
             _unitOfWork.Repository<Settings>().Save(s);
         }
@@ -108,6 +116,7 @@ namespace ModuleA.ViewModels
         {
             return true;
         }
-        
+
+        #endregion
     }
 }

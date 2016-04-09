@@ -6,10 +6,11 @@ namespace TimeKeep.Views
     /// <summary>
     /// Interaction logic for TimeKeepView
     /// </summary>
-    [Export(ViewNames.TimeKeepView)]
-    public partial class TimeKeepView : UserControl
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)] //this is important if you want the view to be created each time it is navigated to.
+    public partial class MainView : UserControl
     {
-        public TimeKeepView()
+        public MainView()
         {
             InitializeComponent();
         }

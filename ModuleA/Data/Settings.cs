@@ -16,13 +16,24 @@ namespace ModuleA.Data
         }
 
         public Settings(Guid id, string name,string value)
+            :base(id)
         {
-            this.Id = id;
             this.Name = name;
             this.Value = value;
         }
 
         public string Name { get; private set; }
         public string Value { get; private set; }
+
+        public void UpdateName(string name)
+        {
+            this.Name = name;
+        }
+
+        public void UpdateValue(string value)
+        {
+            this.Value = value;
+        }
+
     }
 }

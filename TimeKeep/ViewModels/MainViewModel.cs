@@ -4,16 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.Composition;
+using Prism.Regions;
 
 namespace TimeKeep.ViewModels
 {
     [Export]
-    public class TimeKeepViewModel : BindableBase
+    public class MainViewModel : BindableBase
     {
-        public TimeKeepViewModel()
+        [ImportingConstructor]
+        public MainViewModel(IRegionManager regionManager)
         {
             this.Name = "TimeKeep View";
-
         }
 
         private string _name;

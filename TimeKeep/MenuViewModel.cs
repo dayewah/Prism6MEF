@@ -6,6 +6,7 @@ using System.Text;
 using Infrastructure;
 using Prism.Events;
 using Prism.Regions;
+using TimeKeep.Views;
 
 namespace TimeKeep
 {
@@ -18,7 +19,7 @@ namespace TimeKeep
             : base(regionManager, eventAggregator)
         {
             this.Name = "TK";
-            this.Uri = ViewNames.TimeKeepView;
+            this.MainUri = typeof(MainView).FullName;
         }
 
 

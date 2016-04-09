@@ -20,7 +20,8 @@ namespace Common.Data
 
         public T GetById(Guid id)
         {
-            return _context.Set<T>().Find(id);
+            return _context.Set<T>().SingleOrDefault(x => x.Id == id);
+            //return _context.Set<T>().Find(id);
         }
 
         public IQueryable<T> GetAll()
@@ -30,11 +31,25 @@ namespace Common.Data
 
         public void Save(T aggregateRoot)
         {
-            var id = aggregateRoot.Id;
-            if (_context.Set<T>().Any(e => e.Id == id))
+            if (_context.Set<T>().Any(e => e.Id == aggregateRoot.Id))
             {
-                _context.Set<T>().Attach(aggregateRoot);
-                _context.Entry(aggregateRoot).State = EntityState.Modified;
+                
+                //_context.Set<T>().Attach(aggregateRoot);
+                //_context.Entry(aggregateRoot).State = EntityState.Modified;
+
+
+                /*NOTES: Implement with using statement then the above two lines will work. 
+                 *The problem is the entity is already attached so it won't let you add another with the same id
+                 *eg using (var context = new BloggingContext()) 
+                    { 
+                        context.Entry(blog).State = blog.BlogId == 0 ? 
+                                                   EntityState.Added : 
+                                                   EntityState.Modified; 
+ 
+                        context.SaveChanges(); 
+                    } 
+                 */
+
             }
             else
             {
@@ -46,8 +61,8 @@ namespace Common.Data
 
         public void Delete(T aggregateRoot)
         {
-            var result = _context.Set<T>().Find(aggregateRoot.Id);
-            _context.Set<T>().Remove(result);
+            //var result = _context.Set<T>().Find(aggregateRoot.Id);
+            //_context.Set<T>().Remove(result);
         }
     }
 }

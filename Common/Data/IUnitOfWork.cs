@@ -1,8 +1,9 @@
-﻿using Common.DDD;
+﻿using System;
+using Common.DDD;
 
 namespace Common.Data
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork: IDisposable
     {
         void Dispose();
         void Save();

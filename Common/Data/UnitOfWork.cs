@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace Common.Data
 {
     [Export(typeof(IUnitOfWork))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IDbContext _context;
@@ -18,14 +19,11 @@ namespace Common.Data
         private bool _disposed;
         private Hashtable _repositories;
 
+        [ImportingConstructor]
         public UnitOfWork(IDbContext context)
         {
             _context = context;
-        }
-
-        public UnitOfWork()
-        {
-            //_context = new NorthwindContext();
+            _context.Database.EnsureCreated();
         }
 
         public void Dispose()
