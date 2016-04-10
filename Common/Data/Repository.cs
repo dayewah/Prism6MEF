@@ -33,22 +33,9 @@ namespace Common.Data
         {
             if (_context.Set<T>().Any(e => e.Id == aggregateRoot.Id))
             {
-                
-                //_context.Set<T>().Attach(aggregateRoot);
-                //_context.Entry(aggregateRoot).State = EntityState.Modified;
 
-
-                /*NOTES: Implement with using statement then the above two lines will work. 
-                 *The problem is the entity is already attached so it won't let you add another with the same id
-                 *eg using (var context = new BloggingContext()) 
-                    { 
-                        context.Entry(blog).State = blog.BlogId == 0 ? 
-                                                   EntityState.Added : 
-                                                   EntityState.Modified; 
- 
-                        context.SaveChanges(); 
-                    } 
-                 */
+                _context.Set<T>().Attach(aggregateRoot);
+                _context.Entry(aggregateRoot).State = EntityState.Modified;
 
             }
             else
@@ -56,13 +43,12 @@ namespace Common.Data
                 _context.Set<T>().Add(aggregateRoot);
             }
 
-            //_context.SaveChanges();
         }
 
         public void Delete(T aggregateRoot)
         {
-            //var result = _context.Set<T>().Find(aggregateRoot.Id);
-            //_context.Set<T>().Remove(result);
+            var result = this.GetById(aggregateRoot.Id);
+            _context.Set<T>().Remove(result);
         }
     }
 }

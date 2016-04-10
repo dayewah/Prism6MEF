@@ -17,13 +17,13 @@ namespace ModuleA.ViewModels
     public class MainViewModel : BindableBase, INavigationAware
     {
         private IRegionManager _regionManager;
-        private IUnitOfWork _unitOfWork;
+        private UnitOfWorkFactory _unitOfWorkFactory;
 
         [ImportingConstructor]
-        public MainViewModel(IRegionManager regionManager, IUnitOfWork unitOfWork)
+        public MainViewModel(IRegionManager regionManager, UnitOfWorkFactory unitOfWorkFactory)
         {
             _regionManager = regionManager;
-            _unitOfWork = unitOfWork;
+            _unitOfWorkFactory = unitOfWorkFactory;
 
             this.Name = "Module A View";
 
@@ -56,19 +56,24 @@ namespace ModuleA.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            _unitOfWork.Save();
+
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            var s=_unitOfWork.Repository<Settings>().GetAll().FirstOrDefault();
+            
 
-            if (s != null)
+            using (var uow=_unitOfWorkFactory.Create<SettingsContext>())
             {
-                this.Id = s.Id;
-                this.SettingName = s.Name;
-                this.SettingValue = s.Value;
+                var s = uow.Repository<Settings>().GetAll().FirstOrDefault();
+                if (s != null)
+                {
+                    this.Id = s.Id;
+                    this.SettingName = s.Name;
+                    this.SettingValue = s.Value;
+                }
             }
+            
             
         }
 
@@ -104,12 +109,14 @@ namespace ModuleA.ViewModels
 
         public void Submit()
         {
-            var s = _unitOfWork.Repository<Settings>().GetById(this.Id);
-
-            s.UpdateName(this.SettingName);
-            s.UpdateValue(this.SettingValue);
+            using (var uow = _unitOfWorkFactory.Create<SettingsContext>())
+            {
+                var id = this.Id == default(Guid) ? Guid.NewGuid() : this.Id;
+                var s = new Settings(id, this.SettingName, this.SettingValue);
+                uow.Repository<Settings>().Save(s);
+                uow.SaveChanges();
+            }
             
-            _unitOfWork.Repository<Settings>().Save(s);
         }
 
         public bool CanSubmit()

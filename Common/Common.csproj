@@ -131,8 +131,10 @@
     <Compile Include="Data\Extensions\EF7Extensions.cs" />
     <Compile Include="Data\IDbContext.cs" />
     <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\ISession.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
+    <Compile Include="Data\UnitOfWorkFactory.cs" />
     <Compile Include="DDD\AggregateRoot.cs" />
     <Compile Include="DDD\DomainEvents.cs" />
     <Compile Include="DDD\Entity.cs" />

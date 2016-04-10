@@ -4,6 +4,7 @@ using System;
 using Prism.Mef.Modularity;
 using Infrastructure;
 using System.ComponentModel.Composition;
+using TimeKeep.ViewModels;
 
 namespace TimeKeep
 {

@@ -5,18 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prism.Mvvm;
+using Common.Data;
 
 namespace Main.Models
 {
     /// <summary>
     /// Session Object persists the state of the current session
     /// </summary>
-    [Export]
-    public class Session : BindableBase
+    [Export(typeof(ISession))]
+    [PartCreationPolicy(CreationPolicy.Shared)]
+    public class Session : BindableBase, ISession
     {
         public Session()
         {
-
+            this.WorkingDirectory = "Prism6MEF.db";
         }
 
 

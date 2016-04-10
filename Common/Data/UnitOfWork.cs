@@ -10,16 +10,13 @@ using System.Threading.Tasks;
 //http://blog.longle.net/2013/05/11/genericizing-the-unit-of-work-pattern-repository-pattern-with-entity-framework-in-mvc/
 namespace Common.Data
 {
-    [Export(typeof(IUnitOfWork))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IDbContext _context;
 
         private bool _disposed;
         private Hashtable _repositories;
-
-        [ImportingConstructor]
+        
         public UnitOfWork(IDbContext context)
         {
             _context = context;
@@ -32,7 +29,7 @@ namespace Common.Data
             GC.SuppressFinalize(this);
         }
 
-        public void Save()
+        public void SaveChanges()
         {
             _context.SaveChanges();
         }

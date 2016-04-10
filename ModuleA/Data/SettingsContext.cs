@@ -13,11 +13,18 @@ namespace ModuleA.Data
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SettingsContext : DbContext, IDbContext
     {
+        private string _path;
+
+        public SettingsContext(string path)
+        {
+            _path = path;
+        }
+
         public DbSet<Settings> Settings { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=ModuleA.db");
+            optionsBuilder.UseSqlite("Filename=" + _path);
         }
 
         

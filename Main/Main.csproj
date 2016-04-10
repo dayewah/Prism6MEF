@@ -125,6 +125,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{7d128591-659b-4070-b30d-72a8295255eb}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{b0c2c0b6-679d-44c3-a4cb-4ca9a96fbb3d}</Project>
       <Name>Infrastructure</Name>

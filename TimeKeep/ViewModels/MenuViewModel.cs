@@ -8,7 +8,7 @@ using Prism.Events;
 using Prism.Regions;
 using TimeKeep.Views;
 
-namespace TimeKeep
+namespace TimeKeep.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.Shared)]
