@@ -18,12 +18,12 @@ namespace Main.Models
     {
         public Session()
         {
-            this.WorkingDirectory = "Prism6MEF.db";
+            this.CurrentPath = "Prism6MEF.db";
         }
 
 
         private string _workingDirectory;
-        public string WorkingDirectory
+        public string CurrentPath
         {
             get { return _workingDirectory; }
             set { SetProperty(ref _workingDirectory, value); }

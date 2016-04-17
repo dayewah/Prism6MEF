@@ -1,0 +1,8 @@
+﻿ 
+ 
+ 
+
+// Generated helper templates
+// Generated items
+// Prism6MEF\CodeGen\State\PersonState.cs
+// Prism6MEF\CodeGen\State\OrderState.cs

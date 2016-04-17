@@ -21,7 +21,7 @@ namespace Common.Data
 
         public UnitOfWork Create<TContext>() where TContext : IDbContext
         {
-            var dbContext =(IDbContext)Activator.CreateInstance(typeof(TContext),_session.WorkingDirectory);
+            var dbContext =(IDbContext)Activator.CreateInstance(typeof(TContext),_session.CurrentPath);
 
             var uow = new UnitOfWork(dbContext);
 

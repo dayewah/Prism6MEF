@@ -2,6 +2,6 @@
 {
     public interface ISession
     {
-        string WorkingDirectory { get; set; }
+        string CurrentPath { get; set; }
     }
 }
