@@ -1,0 +1,7 @@
+﻿ 
+ 
+
+// Generated helper templates
+// Generated items
+// Prism6MEF\TimeKeep\TimeSheets\TimeSheetState.cs
+// Prism6MEF\TimeKeep\TimeSheets\EntryState.cs

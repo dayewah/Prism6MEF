@@ -20,14 +20,6 @@ namespace Common.DDD
         {
 
         }
-        //protected virtual void AddDomainEvent(IDomainEvent newEvent)
-        //{
-        //    _domainEvents.Add(newEvent);
-        //}
 
-        //public virtual void ClearEvents()
-        //{
-        //    _domainEvents.Clear();
-        //}
     }
 }

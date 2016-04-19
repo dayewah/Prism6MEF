@@ -1,31 +1,18 @@
-﻿<#
-/*----------------------------------------------------------------------------------------------
-    Template: Generates C# code for Entities
-    Author: Daniel Ayewah
-    Links: 
-  		MSDN about developing T4 files	:	http://msdn.microsoft.com/en-us/library/dd820620.aspx 
-  		Tangible T4 Editor				:	http://t4-editor.tangible-engineering.com/blog/how-to-generate-multiple-output-files-from-a-single-t4-template.html
-	Instructions:
-		-paste this file into the models folder with the model entities
-		-use GenerateState attribute to mark classes whose state is to be generated
-		-build project so that its assembly is placed at the $(TargetPath)
-		-save file to generate
-  ----------------------------------------------------------------------------------------------
-*/
-#>
-<#@ template debug="true" hostSpecific="true" #>
+﻿<#@ template debug="true" hostSpecific="true" #>
 <#@ output extension=".txt" #>
 <#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
 <#@ Assembly Name="$(SolutionDir)\CodeGen\bin\Debug\CodeGen.dll" #>
+<#@ Assembly name="EnvDte" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #> 
 <#@ import namespace="CodeGen.State" #> 
 <#@ include file="$(SolutionDir)\CodeGen\TemplateFileManagerV2.1.ttinclude"		#>
 <# 
-	//Uncomment the line below to debug template in another visual studio instance
 	//System.Diagnostics.Debugger.Launch();
 	
 #>
@@ -54,13 +41,13 @@ namespace <#= fileNamespace #>
 			var name=prop.Name;
 			var type=prop.PropertyType;
 
-			var complexType=type.IsValueType||type==typeof(string)?false:true;
+			var complexType=type.Assembly.FullName.Split(',').First()=="CodeGen";
 
             if (complexType)
             {
                 foreach (PropertyInfo prop2 in type.GetProperties())
                 {
-					var name2=type.Name + "_" + prop2.Name;
+					var name2=type.Name + prop2.Name;
 					var type2=prop2.PropertyType;
 					WriteProperty(name2,type2.Name);
                 }

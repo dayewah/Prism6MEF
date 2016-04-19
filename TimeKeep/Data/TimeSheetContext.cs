@@ -8,10 +8,11 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.ChangeTracking;
 using Models.DDD.TimeSheets.Entries;
 using TimeKeep.TimeSheets;
+using Common.Data;
 
 namespace TimeKeep.Data
 {
-    public class TimeSheetContext : DbContext
+    public class TimeSheetContext : DbContext, IDbContext
     {
         private string _path;
         public TimeSheetContext(string path)
@@ -20,8 +21,8 @@ namespace TimeKeep.Data
             _path = path;
         }
 
-        public DbSet<TimeSheet> TimeSheets { get; set; }
-        public DbSet<Entry> Entries { get; set; }
+        public DbSet<TimeSheetState> TimeSheets { get; set; }
+        public DbSet<EntryState> Entries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,23 +30,23 @@ namespace TimeKeep.Data
             
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
 
 
-            modelBuilder.Entity<TimeSheet>()
-                .HasKey(e => e.Id);
+        //    modelBuilder.Entity<TimeSheet>()
+        //        .HasKey(e => e.Id);
 
-            modelBuilder.Entity<Entry>()
-                .Property(p => p.ProjectNumber).HasColumnName("ProjectNumber");
-            modelBuilder.Entity<Entry>()
-                            .Property(p => p.Time.Start).HasColumnName("StartTime");
+        //    modelBuilder.Entity<Entry>()
+        //        .Property(p => p.ProjectNumber).HasColumnName("ProjectNumber");
+        //    modelBuilder.Entity<Entry>()
+        //                    .Property(p => p.Time.Start).HasColumnName("StartTime");
 
-            modelBuilder.Entity<Entry>() // http://ef.readthedocs.org/en/latest/modeling/relationships.html#fluent-api
-                .HasOne(e => e.Time);
+        //    modelBuilder.Entity<Entry>() // http://ef.readthedocs.org/en/latest/modeling/relationships.html#fluent-api
+        //        .HasOne(e => e.Time);
 
-        }
+        //}
 
         public override int SaveChanges()
         {

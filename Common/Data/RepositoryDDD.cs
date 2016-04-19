@@ -9,11 +9,11 @@ using Common.DDD;
 
 namespace Common.Data
 {
-    public class Repository<T> : IRepository<T> where T : Entity
+    public class RepositoryDDD<T> : IRepository<T> where T : AggregateRoot
     {
         protected IDbContext _context;
 
-        public Repository(IDbContext context)
+        public RepositoryDDD(IDbContext context)
         {
             _context = context;
         }
@@ -33,8 +33,8 @@ namespace Common.Data
             if (_context.Set<T>().Any(e => e.Id == entity.Id))
             {
 
-                //_context.Set<T>().Attach(entity);
-                //_context.Entry(entity).State = EntityState.Modified;
+                _context.Set<T>().Attach(entity);
+                _context.Entry(entity).State = EntityState.Modified;
 
             }
             else

@@ -43,17 +43,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using Common.DDD;
 
 namespace <#= fileNamespace #>
 {
-	public class <#= className #> 
+	public class <#= className #> : Entity
     {
 <#
-        foreach (PropertyInfo prop in modelType.GetProperties())
+        foreach (PropertyInfo prop in modelType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly))
         {
 			var name=prop.Name;
 			var type=prop.PropertyType;
-
+			if(name=="State") continue;
 			var complexType=type.IsValueType||type==typeof(string)?false:true;
 
             if (complexType)
@@ -94,7 +95,7 @@ private IEnumerable<Type> GetModelTypes()
 	var asm = Assembly.LoadFrom(pathh);
 	var types=asm.GetTypes()
 			.Where(x=>Attribute.IsDefined(x, typeof(GenerateStateAttribute)));
-
+	
 	return types;
 }
 

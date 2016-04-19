@@ -4,7 +4,7 @@ using Common.DDD;
 
 namespace Common.Data
 {
-    public interface IRepository<T> where T : AggregateRoot
+    public interface IRepository<T> 
     {
         void Delete(T aggregateRoot);
         IQueryable<T> GetAll();

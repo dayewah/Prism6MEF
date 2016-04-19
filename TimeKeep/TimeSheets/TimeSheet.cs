@@ -6,31 +6,39 @@ using System.Threading.Tasks;
 using Common;
 using Common.DDD;
 using Models.DDD.TimeSheets.Entries;
+using CodeGen.State;
 
 namespace TimeKeep.TimeSheets
 {
+    [GenerateState]
     public class TimeSheet : AggregateRoot
     {
         private List<Entry> _entries;
-
-        //private TimeSheet(){ }
+        private TimeSheetState _state;
 
         public TimeSheet()
-            :this(TimePeriod.Today)
+            :this(Guid.NewGuid(),"New TimeSheet",TimePeriod.Today)
         {
             // Default Time Period is Today
         }
-
-        public TimeSheet(TimePeriod period)
-            : base(Guid.NewGuid())
+        
+        public TimeSheet(TimeSheetState state)
+            :this(state.Id,state.Name,new TimePeriod(state.TimePeriod_Start,state.TimePeriod_Duration))
         {
+            _state = state;
+        }
+
+        public TimeSheet(Guid id, string name, TimePeriod timePeriod) : base(id)
+        {
+            this.Name = name;
+            this.Period = timePeriod;
             _entries = new List<Entry>();
-            this.TimePeriod = period;
+            _state = new TimeSheetState();
         }
 
         public string Name { get; set; }
-        public double TotalHours { get { return this.Entries.Sum(x => x.Time.Duration.TotalHours);} }
-        public IEnumerable<Entry> Entries { get { return this.Entries; } }
+        public double TotalHours { get { return this.Entries.Sum(x => x.Period.Duration.TotalHours);} }
+        public IEnumerable<Entry> Entries { get { return _entries; } }
 
         private TimePeriod LastTime
         {
@@ -38,31 +46,42 @@ namespace TimeKeep.TimeSheets
             {
                 return _entries
                     .Count == 0
-                    ? TimePeriod.Null.Offset(-(TimePeriod.Null.Start - this.TimePeriod.Start).TotalHours)//returns null time with start and end of timeperiod
-                    : _entries.Last().Time;
+                    ? TimePeriod.Null.Offset(-(TimePeriod.Null.Start - this.Period.Start).TotalHours)//returns null time with start and end of timeperiod
+                    : _entries.Last().Period;
             }
         }
 
+        private TimePeriod _period;
 
-        private TimePeriod _timePeriod;
-
-        public TimePeriod TimePeriod
+        public TimePeriod Period
         {
-            get { return _timePeriod; }
+            get { return _period; }
             set
             {
-                if (value != _timePeriod)
+                if (value != _period)
                 {
-                    _timePeriod = value;
+                    _period = value;
                     //this.AddDomainEvent(new TimeSheetPeriodChangedEvent(this));
                 }
             }
         }
-        
-        
+
+        public TimeSheetState State
+        {
+            get
+            {
+                _state.Id = this.Id;
+                _state.Name = this.Name;
+                _state.TimePeriod_Start = this.Period.Start;
+                _state.TimePeriod_End = this.Period.End;
+                _state.TimePeriod_Duration = this.Period.Duration;
+                return _state;
+            }
+        }
+
         public string LoadEntries(IEnumerable<Entry> entries)
         {
-            Guard.AssertArgumentTrue(entries.All(x => x.Time.Within(this.TimePeriod)),"all entries should be within current period");
+            Guard.AssertArgumentTrue(entries.All(x => x.Period.Within(this.Period)),"all entries should be within current period");
             _entries = new List<Entry>(entries);
             return string.Empty;
         }
@@ -80,9 +99,9 @@ namespace TimeKeep.TimeSheets
         {
             var entry = new Entry(projectNumber, this.LastTime.Next(hoursDuration).Offset(offset), comment);
 
-            if (this.Entries.Any(x => entry.Time.Intersect(x.Time)))
+            if (this.Entries.Any(x => entry.Period.Intersect(x.Period)))
                 return "entry intersects another";
-            if (entry.Time.Within(this.TimePeriod) == false)
+            if (entry.Period.Within(this.Period) == false)
                 return "entry is outside the current time period";
 
             return string.Empty;
@@ -105,4 +124,13 @@ namespace TimeKeep.TimeSheets
         }        
         
     }
+
+    //public class TimeSheetState : Entity
+    //{
+    //    public String Name { get; set; }
+    //    public Double TotalHours { get; set; }
+    //    public DateTime TimePeriod_Start { get; set; }
+    //    public DateTime TimePeriod_End { get; set; }
+    //    public TimeSpan TimePeriod_Duration { get; set; }
+    //}
 }

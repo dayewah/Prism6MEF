@@ -36,7 +36,6 @@ namespace TimeKeep.TimeSheets
 
         public TimeSpan Duration { get; private set; }
 
-
         protected override bool EqualsCore(TimePeriod other)
         {
             var result = Start == other.Start && Duration == other.Duration;

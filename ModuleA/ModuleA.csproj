@@ -154,6 +154,9 @@
   <ItemGroup>
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Data\SettingsContext.cs" />
+    <Compile Include="Data\SettingsState.cs">
+      <DependentUpon>EntityState.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModuleAModule.cs" />
     <Compile Include="MenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -192,6 +195,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeGen\CodeGen.csproj">
+      <Project>{85a18c18-7d7c-4e09-a631-7aedad8b6b8a}</Project>
+      <Name>CodeGen</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{7d128591-659b-4070-b30d-72a8295255eb}</Project>
       <Name>Common</Name>
@@ -200,6 +207,22 @@
       <Project>{b0c2c0b6-679d-44c3-a4cb-4ca9a96fbb3d}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\EntityState.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityState1.txt</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\EntityState1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityState.tt</DependentUpon>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,4 +1,5 @@
-﻿using Common.DDD;
+﻿using CodeGen.State;
+using Common.DDD;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace ModuleA.Data
 {
-    public class Settings: AggregateRoot
+    [GenerateState]
+    public class Settings:Entity
     {
         public Settings()
             :base(Guid.NewGuid())

@@ -9,8 +9,6 @@ using Microsoft.Data.Entity;
 
 namespace ModuleA.Data
 {
-    [Export(typeof(IDbContext))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SettingsContext : DbContext, IDbContext
     {
         private string _path;

@@ -18,8 +18,8 @@ namespace TimeKeep.ViewModels
         public MenuViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
             : base(regionManager, eventAggregator)
         {
-            this.Name = "TK";
-            this.MainUri = typeof(MainView).FullName;
+            this.Name = "TS";
+            this.MainUri = ViewNames.TimeKeepView;
         }
 
 

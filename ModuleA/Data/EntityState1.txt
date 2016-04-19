@@ -1,0 +1,6 @@
+﻿ 
+ 
+
+// Generated helper templates
+// Generated items
+// Prism6MEF\ModuleA\Data\SettingsState.cs

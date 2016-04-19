@@ -43,7 +43,7 @@ namespace Common.Data
             _disposed = true;
         }
 
-        public IRepository<T> Repository<T>() where T : AggregateRoot
+        public IRepository<T> Repository<T>() 
         {
             if (_repositories == null)
                 _repositories = new Hashtable();

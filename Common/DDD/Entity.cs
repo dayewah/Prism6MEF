@@ -14,7 +14,7 @@ namespace Common.DDD
             this.Id = id;
         }
 
-        public virtual Guid Id { get; protected set; }
+        public virtual Guid Id { get; set; }
 
         public override bool Equals(object obj)
         {
